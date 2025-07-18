@@ -1,8 +1,9 @@
 import { NextRequest } from "next/server";
 import { ContentItem } from "@/types/ContentItem";
+import thumbnails from '@/data/thumbnails.json';
 
-const totalItems = 20;
-const perPage = 10;
+const totalItems = 15;
+const perPage = 15;
 
 const allTrendingItems: ContentItem[] = Array.from({ length: totalItems }, (_, i) => ({
     id: i + 1,
@@ -10,7 +11,7 @@ const allTrendingItems: ContentItem[] = Array.from({ length: totalItems }, (_, i
     year: 2000 + (i % 25),
     genre: ["Sci-Fi", "Adventure"],
     rating: parseFloat((Math.random() * 2 + 7).toFixed(1)),
-    thumbnail: `https://some-placeholder.com/100x120/${i}`,
+    thumbnail: thumbnails[i % thumbnails.length],
     duration: 100 + (i % 40),
     description: `This is a description for Movie ${i + 1}.`,
     cast: ["Actor A", "Actor B"],
