@@ -1,28 +1,17 @@
 "use client";
 
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback } from "react";
 import { ContentItem } from "@/types/ContentItem";
-import ContentGrid from "@/components/ContentGrid";
-import Modal from "@/components/Modal";
-import { useTrending } from "@/hooks/useTrending";
+import ContentGrid from "@/components/content/ContentGrid";
+import Modal from "@/components/shared/Modal";
+import useTrending from "@/hooks/useTrending";
+import Skeleton from "@/components/shared/Skeleton";
 
 const page = 1;
 
-export default function HomePage() {
+const HomePage: React.FC = () => {
     const [selected, setSelected] = useState<ContentItem | null>(null);
-
     const { trending, isLoading } = useTrending(page);
-
-    const loadingSkeleton = useMemo(
-        () =>
-            Array.from({ length: 6 }).map((_, i) => (
-                <div
-                    key={i}
-                    className="w-[250px] h-[350px] border bg-gray-200 rounded-lg animate-pulse"
-                />
-            )),
-        []
-    );
 
     const handleCloseModal = useCallback(() => setSelected(null), []);
 
@@ -31,11 +20,16 @@ export default function HomePage() {
             <h1 className="text-2xl font-bold mb-4">Trending Now</h1>
 
             {isLoading ? (
-                <div className="flex gap-4">{loadingSkeleton}</div>
+                <div className="flex gap-4">
+                    <Skeleton />
+                </div>
             ) : (
                 <ContentGrid items={trending} onSelect={setSelected} />
             )}
+
             <Modal item={selected} onClose={handleCloseModal} />
         </main>
     );
-}
+};
+
+export default HomePage;

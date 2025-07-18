@@ -1,22 +1,29 @@
+import { useCallback, useState, useEffect } from "react";
 import useSWR from "swr";
 import { ContentItem } from "@/types/ContentItem";
-import { useCallback, useState, useEffect } from "react";
 
-export function useTrending(page: number) {
-  const fetcher = useCallback((url: string) => fetch(url).then((res) => res.json()), []);
+interface TrendingApiResponse {
+  categories: {
+    trending: ContentItem[];
+  };
+}
+
+const useTrending = (page: number) => {
+  const fetcher = useCallback(
+      (url: string) => fetch(url).then((res) => res.json()),
+      []
+  );
+
   const [isFakeLoading, setIsFakeLoading] = useState(true);
 
-  const { data, error, isLoading } = useSWR<{
-    categories: { trending: ContentItem[] };
-  }>(`/api/content?page=${page}`, fetcher);
+  const { data, error, isLoading } = useSWR<TrendingApiResponse>(
+      `/api/content?page=${page}`,
+      fetcher
+  );
 
   useEffect(() => {
     setIsFakeLoading(true);
-
-    const timeout = setTimeout(() => {
-      setIsFakeLoading(false);
-    }, 1000); // Simulated 1 second delay
-
+    const timeout = setTimeout(() => setIsFakeLoading(false), 1000);
     return () => clearTimeout(timeout);
   }, [page]);
 
@@ -25,4 +32,6 @@ export function useTrending(page: number) {
     isLoading: isLoading || isFakeLoading,
     isError: error,
   };
-}
+};
+
+export default useTrending;
