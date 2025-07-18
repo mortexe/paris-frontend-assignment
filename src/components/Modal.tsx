@@ -25,7 +25,7 @@ export default function Modal({ item, onClose }: ModalProps) {
 
     return (
         <div
-            className="fixed inset-0 bg-black/90 flex items-center justify-center z-50 overflow-auto"
+            className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 overflow-auto"
             role="dialog"
             aria-modal="true"
             onClick={handleBackdropClick}
