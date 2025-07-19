@@ -16,7 +16,7 @@ const ContentDetails: React.FC<{ item: ContentItem }> = ({ item }) => {
                     className="object-contain"
                     sizes="(max-width: 768px) 100vw, 768px"
                 />
-                {item.watchProgress !== undefined && (
+                {item.watchProgress > 0 && (
                     <div className="absolute bottom-0 left-0 w-full px-6 pb-2 pt-1 backdrop-blur-sm">
                         <ProgressBar progress={watchProgress} />
                     </div>

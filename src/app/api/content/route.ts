@@ -17,7 +17,9 @@ const allTrendingItems: ContentItem[] = Array.from(
         duration: 100 + (i % 40),
         description: `This is a description for Movie ${i + 1}.`,
         cast: ['Actor A', 'Actor B'],
-        watchProgress: Math.floor(Math.random() * 100)
+        watchProgress: Math.random() < 0.6
+            ? 0
+            : Math.floor(Math.random() * 100)
     })
 );
 
