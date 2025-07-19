@@ -2,6 +2,8 @@ import { useCallback, useState, useEffect } from 'react';
 import useSWR from 'swr';
 import { ContentItem } from '@/types/ContentItem';
 import { useWatchHistory } from '@/context/WatchHistoryContext';
+import { getLocalizedMessage } from '@/shared/i18n';
+import { useToast } from '@/context/ToastContext'; // Import Toast
 
 interface TrendingApiResponse {
     categories: {
@@ -10,6 +12,8 @@ interface TrendingApiResponse {
 }
 
 const useTrending = (page: number) => {
+    const { triggerToast } = useToast();
+
     const fetcher = useCallback(
         (url: string) => fetch(url).then((res) => res.json()),
         []
@@ -22,6 +26,20 @@ const useTrending = (page: number) => {
         `/api/content?page=${page}`,
         fetcher
     );
+
+    const errorMessage = error?.status === 404
+        ? getLocalizedMessage('error.noContent')
+        : error?.status === 500
+            ? getLocalizedMessage('error.server')
+            : error
+                ? getLocalizedMessage('error.network')
+                : null;
+
+    useEffect(() => {
+        if (errorMessage) {
+            triggerToast(errorMessage);
+        }
+    }, [errorMessage, triggerToast]);
 
     // sync loaded movies watchProgress with localStorage
     useEffect(() => {
@@ -44,7 +62,7 @@ const useTrending = (page: number) => {
     return {
         trending: data?.categories.trending ?? [],
         isLoading: isLoading || isFakeLoading,
-        isError: error
+        error: errorMessage,
     };
 };
 
