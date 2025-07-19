@@ -1,6 +1,7 @@
 import { useCallback, useState, useEffect } from "react";
 import useSWR from "swr";
 import { ContentItem } from "@/types/ContentItem";
+import { useWatchHistory } from "@/context/WatchHistoryContext";
 
 interface TrendingApiResponse {
   categories: {
@@ -15,11 +16,24 @@ const useTrending = (page: number) => {
   );
 
   const [isFakeLoading, setIsFakeLoading] = useState(true);
+  const { addOrUpdate, getProgress } = useWatchHistory();
 
   const { data, error, isLoading } = useSWR<TrendingApiResponse>(
       `/api/content?page=${page}`,
       fetcher
   );
+
+  // sync loaded movies watchProgress with localStorage
+  useEffect(() => {
+    if (!data?.categories.trending) return;
+
+    data.categories.trending.forEach((item) => {
+      const localProgress = getProgress(String(item.id));
+      if (localProgress === 0 && item.watchProgress > 0) {
+        addOrUpdate(String(item.id), item.watchProgress);
+      }
+    });
+  }, [data, getProgress, addOrUpdate]);
 
   useEffect(() => {
     setIsFakeLoading(true);

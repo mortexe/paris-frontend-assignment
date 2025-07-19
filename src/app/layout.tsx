@@ -21,14 +21,18 @@ interface RootLayoutProps {
     children: React.ReactNode;
 }
 
-const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
+import { WatchHistoryProvider } from "@/context/WatchHistoryContext";
+
+const RootLayout: React.FC<RootLayoutProps> =({ children }: { children: React.ReactNode }) => {
     return (
         <html lang="en">
-        <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        {children}
-        </body>
+            <body>
+                <WatchHistoryProvider>
+                    {children}
+                </WatchHistoryProvider>
+            </body>
         </html>
     );
-};
+}
 
 export default RootLayout;

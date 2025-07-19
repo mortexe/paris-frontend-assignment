@@ -8,4 +8,5 @@ export interface ContentItem {
     duration: number;
     genre: string[];
     cast: string[];
+    watchProgress: number;
 }

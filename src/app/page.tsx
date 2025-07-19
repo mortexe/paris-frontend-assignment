@@ -1,19 +1,20 @@
 "use client";
 
-import { useState, useCallback } from "react";
-import { ContentItem } from "@/types/ContentItem";
+import {useState, useCallback} from "react";
+import {ContentItem} from "@/types/ContentItem";
 import ContentGrid from "@/components/content/ContentGrid";
 import Modal from "@/components/shared/Modal";
 import useTrending from "@/hooks/useTrending";
 import Skeleton from "@/components/shared/Skeleton";
+import ContentDetails from "@/components/content/ContentDetails";
 
 const page = 1;
 
 const HomePage: React.FC = () => {
-    const [selected, setSelected] = useState<ContentItem | null>(null);
-    const { trending, isLoading } = useTrending(page);
+    const [selectedItem, setSelectedItem] = useState<ContentItem | null>(null);
+    const {trending, isLoading} = useTrending(page);
 
-    const handleCloseModal = useCallback(() => setSelected(null), []);
+    const handleCloseModal = useCallback(() => setSelectedItem(null), []);
 
     return (
         <main className="p-6">
@@ -21,13 +22,16 @@ const HomePage: React.FC = () => {
 
             {isLoading ? (
                 <div className="flex gap-4">
-                    <Skeleton />
+                    <Skeleton/>
                 </div>
             ) : (
-                <ContentGrid items={trending} onSelect={setSelected} />
+                <>
+                    <ContentGrid items={trending} onSelect={setSelectedItem}/>
+                    <Modal isOpen={!!selectedItem} onClose={handleCloseModal} ariaLabel={selectedItem?.title}>
+                        {selectedItem && <ContentDetails item={selectedItem}/>}
+                    </Modal>
+                </>
             )}
-
-            <Modal item={selected} onClose={handleCloseModal} />
         </main>
     );
 };
