@@ -1,0 +1,7 @@
+{
+  "error.network": "A network error occurred. Please try again.",
+  "error.notFound": "The requested resource could not be found.",
+  "error.unknown": "An unknown error occurred. Please try again later.",
+  "error.noContent": "No content available at the moment.",
+  "error.server": "An error occurred on the server. Please try again."
+}
