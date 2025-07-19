@@ -1,51 +1,51 @@
-import { useCallback, useState, useEffect } from "react";
-import useSWR from "swr";
-import { ContentItem } from "@/types/ContentItem";
-import { useWatchHistory } from "@/context/WatchHistoryContext";
+import { useCallback, useState, useEffect } from 'react';
+import useSWR from 'swr';
+import { ContentItem } from '@/types/ContentItem';
+import { useWatchHistory } from '@/context/WatchHistoryContext';
 
 interface TrendingApiResponse {
-  categories: {
-    trending: ContentItem[];
-  };
+    categories: {
+        trending: ContentItem[];
+    };
 }
 
 const useTrending = (page: number) => {
-  const fetcher = useCallback(
-      (url: string) => fetch(url).then((res) => res.json()),
-      []
-  );
+    const fetcher = useCallback(
+        (url: string) => fetch(url).then((res) => res.json()),
+        []
+    );
 
-  const [isFakeLoading, setIsFakeLoading] = useState(true);
-  const { addOrUpdate, getProgress } = useWatchHistory();
+    const [isFakeLoading, setIsFakeLoading] = useState(true);
+    const { addOrUpdate, getProgress } = useWatchHistory();
 
-  const { data, error, isLoading } = useSWR<TrendingApiResponse>(
-      `/api/content?page=${page}`,
-      fetcher
-  );
+    const { data, error, isLoading } = useSWR<TrendingApiResponse>(
+        `/api/content?page=${page}`,
+        fetcher
+    );
 
-  // sync loaded movies watchProgress with localStorage
-  useEffect(() => {
-    if (!data?.categories.trending) return;
+    // sync loaded movies watchProgress with localStorage
+    useEffect(() => {
+        if (!data?.categories.trending) return;
 
-    data.categories.trending.forEach((item) => {
-      const localProgress = getProgress(String(item.id));
-      if (localProgress === 0 && item.watchProgress > 0) {
-        addOrUpdate(String(item.id), item.watchProgress);
-      }
-    });
-  }, [data, getProgress, addOrUpdate]);
+        data.categories.trending.forEach((item) => {
+            const localProgress = getProgress(String(item.id));
+            if (localProgress === 0 && item.watchProgress > 0) {
+                addOrUpdate(String(item.id), item.watchProgress);
+            }
+        });
+    }, [data, getProgress, addOrUpdate]);
 
-  useEffect(() => {
-    setIsFakeLoading(true);
-    const timeout = setTimeout(() => setIsFakeLoading(false), 1000);
-    return () => clearTimeout(timeout);
-  }, [page]);
+    useEffect(() => {
+        setIsFakeLoading(true);
+        const timeout = setTimeout(() => setIsFakeLoading(false), 1000);
+        return () => clearTimeout(timeout);
+    }, [page]);
 
-  return {
-    trending: data?.categories.trending ?? [],
-    isLoading: isLoading || isFakeLoading,
-    isError: error,
-  };
+    return {
+        trending: data?.categories.trending ?? [],
+        isLoading: isLoading || isFakeLoading,
+        isError: error
+    };
 };
 
 export default useTrending;

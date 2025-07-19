@@ -1,10 +1,10 @@
-import { ContentItem } from "@/types/ContentItem";
-import Image from "next/image";
-import ProgressBar from "@/components/shared/ProgressBar";
-import {useWatchHistory} from "@/context/WatchHistoryContext";
+import { ContentItem } from '@/types/ContentItem';
+import Image from 'next/image';
+import ProgressBar from '@/components/shared/ProgressBar';
+import { useWatchHistory } from '@/context/WatchHistoryContext';
 
 const ContentDetails: React.FC<{ item: ContentItem }> = ({ item }) => {
-    const {getProgress}  = useWatchHistory()
+    const { getProgress } = useWatchHistory();
     const watchProgress = getProgress(String(item.id));
     return (
         <>
@@ -25,11 +25,15 @@ const ContentDetails: React.FC<{ item: ContentItem }> = ({ item }) => {
 
             <div className="bg-[#222831] p-6 text-white">
                 <h2 className="text-2xl font-bold mb-2">{item.title}</h2>
-                <p className="mb-4">{item.description || "No description available"}</p>
+                <p className="mb-4">
+                    {item.description || 'No description available'}
+                </p>
                 <p className="text-sm text-gray-300 mb-1">Year: {item.year}</p>
-                <p className="text-sm text-gray-300 mb-1">Rating: {item.rating}/10</p>
+                <p className="text-sm text-gray-300 mb-1">
+                    Rating: {item.rating}/10
+                </p>
                 <p className="text-sm text-gray-300">
-                    Cast: {item.cast?.join(", ") || "Unknown Cast"}
+                    Cast: {item.cast?.join(', ') || 'Unknown Cast'}
                 </p>
             </div>
         </>

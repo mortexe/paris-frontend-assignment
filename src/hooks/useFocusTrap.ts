@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
 export const useFocusTrap = (
     ref: React.RefObject<HTMLElement | null>,
@@ -6,11 +6,11 @@ export const useFocusTrap = (
 ) => {
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
-            if (e.key === "Escape") {
+            if (e.key === 'Escape') {
                 onEscape();
             }
 
-            if (e.key !== "Tab" || !ref.current) return;
+            if (e.key !== 'Tab' || !ref.current) return;
 
             const focusable = ref.current.querySelectorAll<HTMLElement>(
                 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
@@ -40,9 +40,9 @@ export const useFocusTrap = (
             }
         };
 
-        document.addEventListener("keydown", handleKeyDown);
+        document.addEventListener('keydown', handleKeyDown);
         return () => {
-            document.removeEventListener("keydown", handleKeyDown);
+            document.removeEventListener('keydown', handleKeyDown);
         };
     }, [ref, onEscape]);
 };

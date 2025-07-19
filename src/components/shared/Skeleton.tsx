@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 interface SkeletonProps {
     count?: number;
@@ -11,7 +11,7 @@ const Skeleton: React.FC<SkeletonProps> = ({ count = 6, className }) => {
             {Array.from({ length: count }).map((_, i) => (
                 <div
                     key={i}
-                    className={`w-[250px] h-[350px] bg-gray-200 rounded-lg animate-pulse ${className || ""}`}
+                    className={`w-[250px] h-[350px] bg-gray-200 rounded-lg animate-pulse ${className || ''}`}
                     aria-hidden="true"
                 />
             ))}

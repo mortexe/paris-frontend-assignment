@@ -1,7 +1,7 @@
-import { ContentItem } from "@/types/ContentItem";
-import Image from "next/image";
-import { useWatchHistory } from "@/context/WatchHistoryContext";
-import ProgressBar from "@/components/shared/ProgressBar";
+import { ContentItem } from '@/types/ContentItem';
+import Image from 'next/image';
+import { useWatchHistory } from '@/context/WatchHistoryContext';
+import ProgressBar from '@/components/shared/ProgressBar';
 
 interface ContentItemCardProps {
     item: ContentItem;
@@ -30,11 +30,12 @@ const ContentItemCard: React.FC<ContentItemCardProps> = ({ item, onClick }) => {
             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/90 to-transparent text-white p-3 z-10 space-y-1">
                 <div>
                     <h3 className="text-sm font-semibold">{item.title}</h3>
-                    <p className="text-xs">{item.year} • {item.rating}/10</p>
+                    <p className="text-xs">
+                        {item.year} • {item.rating}/10
+                    </p>
                 </div>
 
                 <ProgressBar progress={progress} />
-
             </div>
         </button>
     );

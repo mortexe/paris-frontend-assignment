@@ -1,18 +1,18 @@
-"use client";
+'use client';
 
-import {useState, useCallback} from "react";
-import {ContentItem} from "@/types/ContentItem";
-import ContentGrid from "@/components/content/ContentGrid";
-import Modal from "@/components/shared/Modal";
-import useTrending from "@/hooks/useTrending";
-import Skeleton from "@/components/shared/Skeleton";
-import ContentDetails from "@/components/content/ContentDetails";
+import { useState, useCallback } from 'react';
+import { ContentItem } from '@/types/ContentItem';
+import ContentGrid from '@/components/content/ContentGrid';
+import Modal from '@/components/shared/Modal';
+import useTrending from '@/hooks/useTrending';
+import Skeleton from '@/components/shared/Skeleton';
+import ContentDetails from '@/components/content/ContentDetails';
 
 const page = 1;
 
 const HomePage: React.FC = () => {
     const [selectedItem, setSelectedItem] = useState<ContentItem | null>(null);
-    const {trending, isLoading} = useTrending(page);
+    const { trending, isLoading } = useTrending(page);
 
     const handleCloseModal = useCallback(() => setSelectedItem(null), []);
 
@@ -22,13 +22,17 @@ const HomePage: React.FC = () => {
 
             {isLoading ? (
                 <div className="flex gap-4">
-                    <Skeleton/>
+                    <Skeleton />
                 </div>
             ) : (
                 <>
-                    <ContentGrid items={trending} onSelect={setSelectedItem}/>
-                    <Modal isOpen={!!selectedItem} onClose={handleCloseModal} ariaLabel={selectedItem?.title}>
-                        {selectedItem && <ContentDetails item={selectedItem}/>}
+                    <ContentGrid items={trending} onSelect={setSelectedItem} />
+                    <Modal
+                        isOpen={!!selectedItem}
+                        onClose={handleCloseModal}
+                        ariaLabel={selectedItem?.title}
+                    >
+                        {selectedItem && <ContentDetails item={selectedItem} />}
                     </Modal>
                 </>
             )}

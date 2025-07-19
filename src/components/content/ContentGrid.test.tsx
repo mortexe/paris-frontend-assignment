@@ -44,7 +44,7 @@ describe('ContentGrid', () => {
         const mockOnSelect = vi.fn();
         render(<ContentGrid items={mockItems} onSelect={mockOnSelect} />);
 
-        mockItems.forEach(item => {
+        mockItems.forEach((item) => {
             expect(screen.getByText(item.title)).toBeInTheDocument();
         });
     });

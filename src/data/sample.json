@@ -1,54 +1,44 @@
 {
-  "content": [
-    {
-      "id": 1,
-      "title": "Inception",
-      "year": 2010,
-      "genre": [
-        "Sci-Fi",
-        "Thriller"
-      ],
-      "rating": 8.8,
-      "thumbnail": "https://image.tmdb.org/t/p/w500/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg",
-      "duration": 148,
-      "description": "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.",
-      "cast": [
-        "Leonardo DiCaprio",
-        "Marion Cotillard",
-        "Tom Hardy"
-      ],
-      "watchProgress": 65
-    }
-  ],
-  "pagination": {
-    "currentPage": 1,
-    "totalPages": 12,
-    "hasNext": true,
-    "totalItems": 143
-  },
-  "categories": {
-    "trending": [
-      {
-        "id": 4,
-        "title": "Dune",
-        "year": 2021,
-        "genre": [
-          "Sci-Fi",
-          "Adventure"
-        ],
-        "rating": 8.0,
-        "thumbnail": "https://image.tmdb.org/t/p/w500/d5NXSklXo0qyIYkgV94XAgMIckC.jpg",
-        "duration": 155,
-        "description": "Paul Atreides, a brilliant and gifted young man born into a great destiny beyond his understanding.",
-        "cast": [
-          "Timothée Chalamet",
-          "Rebecca Ferguson",
-          "Oscar Isaac"
-        ],
-        "watchProgress": 0
-      }
+    "content": [
+        {
+            "id": 1,
+            "title": "Inception",
+            "year": 2010,
+            "genre": ["Sci-Fi", "Thriller"],
+            "rating": 8.8,
+            "thumbnail": "https://image.tmdb.org/t/p/w500/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg",
+            "duration": 148,
+            "description": "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.",
+            "cast": ["Leonardo DiCaprio", "Marion Cotillard", "Tom Hardy"],
+            "watchProgress": 65
+        }
     ],
-    "forYou": [],
-    "newReleases": []
-  }
+    "pagination": {
+        "currentPage": 1,
+        "totalPages": 12,
+        "hasNext": true,
+        "totalItems": 143
+    },
+    "categories": {
+        "trending": [
+            {
+                "id": 4,
+                "title": "Dune",
+                "year": 2021,
+                "genre": ["Sci-Fi", "Adventure"],
+                "rating": 8.0,
+                "thumbnail": "https://image.tmdb.org/t/p/w500/d5NXSklXo0qyIYkgV94XAgMIckC.jpg",
+                "duration": 155,
+                "description": "Paul Atreides, a brilliant and gifted young man born into a great destiny beyond his understanding.",
+                "cast": [
+                    "Timothée Chalamet",
+                    "Rebecca Ferguson",
+                    "Oscar Isaac"
+                ],
+                "watchProgress": 0
+            }
+        ],
+        "forYou": [],
+        "newReleases": []
+    }
 }

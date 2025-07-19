@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import React, { useRef } from "react";
-import { useFocusTrap } from "@/hooks/useFocusTrap";
+import React, { useRef } from 'react';
+import { useFocusTrap } from '@/hooks/useFocusTrap';
 
 interface ModalProps {
     isOpen: boolean;
@@ -10,7 +10,12 @@ interface ModalProps {
     ariaLabel?: string;
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, ariaLabel }) => {
+const Modal: React.FC<ModalProps> = ({
+    isOpen,
+    onClose,
+    children,
+    ariaLabel
+}) => {
     const modalRef = useRef<HTMLDivElement>(null);
     useFocusTrap(modalRef, onClose);
 
@@ -25,7 +30,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, ariaLabel }) =
             className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 overflow-auto"
             role="dialog"
             aria-modal="true"
-            aria-label={ariaLabel ?? "Dialog"}
+            aria-label={ariaLabel ?? 'Dialog'}
             onClick={handleBackdropClick}
         >
             <div
