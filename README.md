@@ -27,15 +27,21 @@ I've also uploaded the **Part 1 : Code Review** pdf file directly into this repo
     npm install
     ```
 
-3. **Start the Development Server**:
+3. **Build the Application**:
+
+    ```bash
+    npm run build
+    ```
+
+4. **Start the Development Server**:
 
     ```bash
     npm run dev
     ```
 
-4. Open a browser and navigate to: `http://localhost:3000`
+5. Open a browser and navigate to: `http://localhost:3000`
 
-5. **Run Tests**:
+6. **Run Tests**:
     ```bash
     npm test
     ```
@@ -52,12 +58,6 @@ I've also uploaded the **Part 1 : Code Review** pdf file directly into this repo
 
     ```bash
     npm run format
-    ```
-
-- **Build the Application**:
-
-    ```bash
-    npm run build
     ```
 
 - **Run the Production Build Locally**:
