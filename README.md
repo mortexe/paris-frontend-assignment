@@ -1,36 +1,132 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Paris Frontend Assignment
 
-## Getting Started
+Thank you for taking a look over this assignment. I tried to follow all instructions explained in the PDF,
+and hope I didn't misunderstand or misinterpret any of the actual assignment intentions!
 
-First, run the development server:
+I've also uploaded the **Part 1 : Code Review** pdf file directly into this repo as well.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Setup Instructions
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Prerequisites
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Node.js**: v16 or higher.
+- **npm**
 
-## Learn More
+### Steps
 
-To learn more about Next.js, take a look at the following resources:
+1. **Clone the Repository**:
+    ```bash
+    git clone https://github.com/mortexe/paris-frontend-assignment.git
+    cd paris-frontend-assignment
+    ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. **Install Dependencies**:
+    ```bash
+    npm install
+    ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3. **Start the Development Server**:
+    ```bash
+    npm run dev
+    ```
 
-## Deploy on Vercel
+4. Open a browser and navigate to: `http://localhost:3000`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+5. **Run Tests**:
+    ```bash
+    npm test
+    ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Additional Commands
+
+- **Linting**:
+    ```bash
+    npm run lint
+    ```
+
+- **Code Formatting**:
+    ```bash
+    npm run format
+    ```
+
+- **Build the Application**:
+    ```bash
+    npm run build
+    ```
+
+- **Run the Production Build Locally**:
+    ```bash
+    npm start
+    ```
+
+---
+
+## Architectural Decisions
+
+### Framework
+The project uses **Next.js**, taking advantage of:
+- **Server-Side Rendering (SSR)** and **Static Site Generation (SSG)** for optimized performance and improved SEO.
+- **File-based routing** for a scalable and maintainable architecture.
+
+### Folder Structure
+
+- **`src` Folder**: Contains all application files and code.
+    - `components`: UI components, further split into:
+        - `shared`: Reusable components like `Modal`, `ProgressBar`, etc.
+        - `content`: Specific components for content display, e.g., `ContentGrid`, `ContentItemCard`.
+        - `error`: Components for error handling (`ErrorBoundary`, `GenericErrorFallback`)
+    - `context`: For global state management using React contexts, e.g., `WatchHistoryContext`, `ToastContext`.
+    - `data`: Static or mock data files such as `sample.json`.
+    - `hooks`: Reusable custom React hooks, e.g., `useTrending`, `useFocusTrap`.
+    - `locales`: Localization files for internationalization.
+    - `shared`: Shared utilities or configuration files (e.g. i18n setup).
+    - `types`: TypeScript type definitions for models or utilities.
+
+### State Management
+The app uses **React Context API** for global state:
+- **WatchHistoryContext**: Manages and persists watch history and progress tracking.
+- **ToastContext**: Manages toast notifications across the app.
+
+### Error Handling
+- **ErrorBoundary Component**:
+    - Wraps components to catch rendering errors and display fallback UIs gracefully.
+    - Errors are logged via `console.error` (extendable for production, e.g., logging with Sentry).
+
+### Styling
+The application uses **TailwindCSS** for utility-first CSS styling:
+- Consistent designs using reusable utility classes.
+- Configuration and customization are defined in `tailwind.config.js`.
+
+### Testing
+The project uses **Vitest** for testing:
+- **Unit Tests**: `ContentGrid.test.tsx` validates `ContentGrid.tsx` component.
+
+Testing setup is defined in `setupTests.ts`.
+
+### Code Quality
+- **ESLint**: Enforces coding standards and catches potential issues during development.
+- **Prettier**: Automatically formats code for consistency based on `.prettierrc` rules.
+
+---
+
+## Assumptions
+
+### Data and Content
+- Static mock data files stored in the `src/data/` directory simulate API responses during development.
+- It assumes the backend will deliver data in the same format as the provided mock files.
+
+### Watch History
+- `WatchHistoryContext` manages video progress and history.
+- Persistent storage (e.g., localStorage or backend sync) is assumed.
+
+### Accessibility
+- The app strives to meet basic accessibility standards using attributes like `aria-label` and proper keyboard navigation.
+
+### Browser Support
+- The app is optimized for modern browsers supporting ES6+ JavaScript and modern CSS features like Flexbox and CSS Grid.
+
+### Error Management
+- Critical application areas are wrapped in the `ErrorBoundary` component to handle runtime errors gracefully.
+- Fallback UIs ensure users are provided with clear feedback in case of failures.
+- The `ToastProvider` is utilized to display toast notifications for non-critical errors (404, 500 etc.) and user feedback. It's currently being used in `useTrending` hook, where all fetching is done.
