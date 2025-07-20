@@ -64,6 +64,16 @@ I've also uploaded the **Part 1 : Code Review** pdf file directly into this repo
 
 ## Architectural Decisions
 
+### Performance Optimization
+- **Image Optimization**:
+  - The app can leverage Next.js's `next/image` component for automatic image resizing, lazy loading, and format selection.
+
+- **SWR**:
+  - SWR helps with efficient data fetching by caching responses and allowing the app to use previously fetched data while revalidating in the background. This reduces redundant network requests and ensures updated data.
+
+- **useCallback & useMemo**:
+  - Utilizing React's performance optimization hooks collectively improves the performance of `WatchHistoryContext.Provider` and its consumers, especially in contexts where frequent state updates like watch history tracking might occur.
+
 ### Framework
 The project uses **Next.js**, taking advantage of:
 - **Server-Side Rendering (SSR)** and **Static Site Generation (SSG)** for optimized performance and improved SEO.
