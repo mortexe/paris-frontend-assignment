@@ -3,7 +3,7 @@ import useSWR from 'swr';
 import { ContentItem } from '@/types/ContentItem';
 import { useWatchHistory } from '@/context/WatchHistoryContext';
 import { getLocalizedMessage } from '@/shared/i18n';
-import { useToast } from '@/context/ToastContext'; // Import Toast
+import { useToast } from '@/context/ToastContext';
 
 interface TrendingApiResponse {
     categories: {
