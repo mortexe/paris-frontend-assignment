@@ -35,7 +35,10 @@ const ToastContainer: React.FC = () => {
         window.addEventListener('app-toast', handleToastEvent as EventListener);
 
         return () => {
-            window.removeEventListener('app-toast', handleToastEvent as EventListener);
+            window.removeEventListener(
+                'app-toast',
+                handleToastEvent as EventListener
+            );
         };
     }, []);
 
@@ -45,7 +48,9 @@ const ToastContainer: React.FC = () => {
                 <div
                     key={toast.id}
                     className={`toast-transition bg-red-500 text-white rounded-md px-4 py-2 shadow-md flex items-center justify-between ${
-                        toast.isLeaving ? 'animate-slide-out' : 'animate-slide-in'
+                        toast.isLeaving
+                            ? 'animate-slide-out'
+                            : 'animate-slide-in'
                     }`}
                 >
                     <span>{toast.message}</span>

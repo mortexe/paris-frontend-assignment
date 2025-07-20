@@ -27,11 +27,12 @@ const useTrending = (page: number) => {
         fetcher
     );
 
-    const errorMessage = error?.status === 404
-        ? getLocalizedMessage('error.noContent')
-        : error?.status === 500
-            ? getLocalizedMessage('error.server')
-            : error
+    const errorMessage =
+        error?.status === 404
+            ? getLocalizedMessage('error.noContent')
+            : error?.status === 500
+              ? getLocalizedMessage('error.server')
+              : error
                 ? getLocalizedMessage('error.network')
                 : null;
 
@@ -62,7 +63,7 @@ const useTrending = (page: number) => {
     return {
         trending: data?.categories.trending ?? [],
         isLoading: isLoading || isFakeLoading,
-        error: errorMessage,
+        error: errorMessage
     };
 };
 

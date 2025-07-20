@@ -5,10 +5,15 @@ import ProgressBar from '@/components/shared/ProgressBar';
 
 interface ContentItemCardProps {
     item: ContentItem;
+    isPriorityLoaded: boolean;
     onClick: () => void;
 }
 
-const ContentItemCard: React.FC<ContentItemCardProps> = ({ item, onClick }) => {
+const ContentItemCard: React.FC<ContentItemCardProps> = ({
+    item,
+    isPriorityLoaded,
+    onClick
+}) => {
     const { getProgress } = useWatchHistory();
     const progress = getProgress(String(item.id));
 
@@ -25,6 +30,8 @@ const ContentItemCard: React.FC<ContentItemCardProps> = ({ item, onClick }) => {
                 alt={`Poster of ${item.title}`}
                 fill
                 className="object-cover absolute inset-0 -z-10"
+                sizes="(max-width: 768px) 100vw, 768px"
+                priority={isPriorityLoaded}
             />
 
             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/90 to-transparent text-white p-3 z-10 space-y-1">

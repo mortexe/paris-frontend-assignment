@@ -19,9 +19,13 @@ const ContentGrid: React.FC<ContentGridProps> = ({ items, onSelect }) => {
             role="list"
             aria-label="Trending Content"
         >
-            {items.map((item) => (
+            {items.map((item, index) => (
                 <li key={item.id} className="scroll-snap-start">
-                    <ContentItemCard item={item} onClick={handleSelect(item)} />
+                    <ContentItemCard
+                        item={item}
+                        isPriorityLoaded={index < 6}
+                        onClick={handleSelect(item)}
+                    />
                 </li>
             ))}
         </ul>
