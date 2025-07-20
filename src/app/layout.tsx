@@ -2,11 +2,13 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { WatchHistoryProvider } from '@/context/WatchHistoryContext';
 import { ToastProvider } from '@/context/ToastContext';
-import ToastContainer from "@/components/shared/ToastContainer";
+import ToastContainer from '@/components/shared/ToastContainer';
+import ErrorBoundary from '@/components/error/ErrorBoundary';
+import GenericErrorFallback from '@/components/error/GenericErrorFallback';
 
 export const metadata: Metadata = {
     title: 'ZenithFlix',
-    description: 'Created by Paris Ltd',
+    description: 'Created by Paris Ltd'
 };
 
 interface RootLayoutProps {
@@ -16,14 +18,16 @@ interface RootLayoutProps {
 const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
     return (
         <html lang="en">
-        <body>
-        <ToastProvider>
-            <WatchHistoryProvider>
-                <ToastContainer />
-                {children}
-            </WatchHistoryProvider>
-        </ToastProvider>
-        </body>
+            <body>
+                <ErrorBoundary fallback={<GenericErrorFallback />}>
+                    <ToastProvider>
+                        <WatchHistoryProvider>
+                            <ToastContainer />
+                            {children}
+                        </WatchHistoryProvider>
+                    </ToastProvider>
+                </ErrorBoundary>
+            </body>
         </html>
     );
 };

@@ -4,7 +4,7 @@ type Messages = typeof en;
 type Locale = 'en';
 
 const locales: Record<Locale, Messages> = {
-    en,
+    en
 };
 
 let currentLocale: Locale = 'en';
@@ -17,6 +17,9 @@ export const setLocale = (locale: Locale) => {
     }
 };
 
-export const getLocalizedMessage = (key: keyof Messages, fallback?: string): string => {
+export const getLocalizedMessage = (
+    key: keyof Messages,
+    fallback?: string
+): string => {
     return locales[currentLocale][key] || fallback || 'Message not available';
 };
