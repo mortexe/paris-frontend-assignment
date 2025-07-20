@@ -2,8 +2,8 @@ import { NextRequest } from 'next/server';
 import { ContentItem } from '@/types/ContentItem';
 import thumbnails from '@/data/thumbnails.json';
 
-const totalItems = 15;
-const perPage = 15;
+const totalItems = 14;
+const perPage = 14;
 
 const allTrendingItems: ContentItem[] = Array.from(
     { length: totalItems },
