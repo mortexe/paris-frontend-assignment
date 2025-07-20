@@ -24,7 +24,10 @@ const ContentDetails: React.FC<{ item: ContentItem }> = ({ item }) => {
             </div>
 
             <div className="bg-[#222831] p-6 text-white">
-                <h2 className="text-2xl font-bold mb-2">{item.title}</h2>
+                <p className="text-sm text-gray-300 mb-2 float-right">
+                    {item.duration}m
+                </p>
+                <h2 className="text-2xl font-bold mb-1">{item.title}</h2>
                 <p className="mb-4">
                     {item.description || 'No description available'}
                 </p>
