@@ -110,9 +110,9 @@ The app uses **React Context API** for global state:
 
 ### Error Handling
 
-- **ErrorBoundary Component**:
-    - Wraps components to catch rendering errors and display fallback UIs gracefully.
-    - Errors are logged via `console.error` (extendable for production, e.g., logging with Sentry).
+- Critical application areas are wrapped in the `ErrorBoundary` component to handle runtime errors gracefully.
+- Fallback UIs ensure users are provided with clear feedback in case of failures.
+- The `ToastProvider` is utilized to display toast notifications for non-critical errors (404, 500 etc.) and user feedback. It's currently being used in `useTrending` hook, where all fetching is done.
 
 ### Styling
 
@@ -155,9 +155,3 @@ Testing setup is defined in `setupTests.ts`.
 ### Browser Support
 
 - The app is optimized for modern browsers supporting ES6+ JavaScript and modern CSS features like Flexbox and CSS Grid.
-
-### Error Management
-
-- Critical application areas are wrapped in the `ErrorBoundary` component to handle runtime errors gracefully.
-- Fallback UIs ensure users are provided with clear feedback in case of failures.
-- The `ToastProvider` is utilized to display toast notifications for non-critical errors (404, 500 etc.) and user feedback. It's currently being used in `useTrending` hook, where all fetching is done.
